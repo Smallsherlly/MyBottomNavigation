@@ -7,7 +7,14 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     tools:context=".MainActivity">
-
+    <it.sephiroth.android.library.bottomnavigation.BottomNavigation
+        android:id="@+id/BottomNavigation"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        app:bbn_badgeProvider="@string/bbn_badgeProvider"
+        app:bbn_entries="@menu/bottombar_menu_3items"
+        />
     <android.support.design.widget.AppBarLayout android:id="@+id/AppBarLayout01"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
