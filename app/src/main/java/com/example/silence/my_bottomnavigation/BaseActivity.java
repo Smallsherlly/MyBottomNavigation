@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        //mViewPager = (ViewPager) findViewById(R.id.ViewPager01);
+        mViewPager = (ViewPager) findViewById(R.id.ViewPager01);
         mBottomNavigation = (BottomNavigation) findViewById(R.id.BottomNavigation);
         if (null != mBottomNavigation) {
             Typeface typeface = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
@@ -48,15 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
             mBottomNavigation.setDefaultTypeface(typeface);
         }
     }
-    public boolean hasManagedToolbarScroll() {
-        return hasAppBarLayout() && findViewById(R.id.CoordinatorLayout01) instanceof CoordinatorLayout;
-    }
-    public Toolbar getToolbar() {
-        return (Toolbar) findViewById(R.id.toolbar);
-    }
-    public boolean hasAppBarLayout() {
-        return getToolbar().getParent() instanceof AppBarLayout;
-    }
+
+
     public boolean hasTranslucentStatusBar() {
         if (!mTranslucentStatusSet) {
             if (Build.VERSION.SDK_INT >= 19) {

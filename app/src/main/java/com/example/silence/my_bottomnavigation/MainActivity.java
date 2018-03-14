@@ -18,20 +18,13 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);// 设置布局文件
-        final ViewGroup root = (ViewGroup) findViewById(R.id.CoordinatorLayout01);// 获取协调布局
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);// 获取工具栏控件
-        setSupportActionBar(toolbar);// 用ToolBar替代原本的ActionBar
 
-        final int statusbarHeight = getStatusBarHeight();
-        final boolean translucentStatus = hasTranslucentStatusBar();
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }// 隐藏标题栏
+
         final boolean translucentNavigation = hasTranslucentNavigation();// 设置导航栏隐藏？待确认
-        if (translucentStatus) {
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) root.getLayoutParams();
-            params.topMargin = -statusbarHeight;
 
-            params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
-            params.topMargin = statusbarHeight;
-        }
         if (translucentNavigation) {
             final ViewPager viewPager = getViewPager();
             if (null != viewPager) {
