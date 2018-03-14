@@ -1,9 +1,18 @@
 package com.example.silence.my_bottomnavigation;
 
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewGroup;
+
+import it.sephiroth.android.library.bottomnavigation.BadgeProvider;
+import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
+import it.sephiroth.android.library.bottomnavigation.FloatingActionButtonBehavior;
 
 public class MainActivity extends BaseActivity {
 
@@ -11,18 +20,53 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);// 设置布局文件
-        final ViewGroup root = (ViewGroup) findViewById(R.id.CoordinatorLayout01);// 获取协调布局
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);// 获取工具栏控件
-        setSupportActionBar(toolbar);// 用ToolBar替代原本的ActionBar
-
-        initializeBottomNavigation(savedInstanceState);// 初始化底部导航栏
-        initializeUI(savedInstanceState);// 初始化界面
+//        final ViewGroup root = (ViewGroup) findViewById(R.id.CoordinatorLayout01);// 获取协调布局
+//        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);// 获取工具栏控件
+//        setSupportActionBar(toolbar);// 用ToolBar替代原本的ActionBar
+//
+//        initializeBottomNavigation(savedInstanceState);// 初始化底部导航栏
+//        initializeUI(savedInstanceState);// 初始化界面
 
     }
 
     private void initializeUI(Bundle savedInstanceState) {
+
+
+        final ViewPager viewPager = getViewPager();
+        if (null != viewPager) {
+
+            getBottomNavigation().setOnMenuChangedListener(new BottomNavigation.OnMenuChangedListener() {
+                @Override
+                public void onMenuChanged(final BottomNavigation parent) {
+
+                    //viewPager.setAdapter(new ViewPagerAdapter(MainActivity.this, parent.getMenuItemCount()));
+                    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(
+                                final int position, final float positionOffset, final int positionOffsetPixels) { }
+
+                        @Override
+                        public void onPageSelected(final int position) {
+                            if (getBottomNavigation().getSelectedIndex() != position) {
+                                getBottomNavigation().setSelectedIndex(position, false);
+                            }
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(final int state) { }
+                    });
+                }
+            });
+
+        }
     }
 
     private void initializeBottomNavigation(Bundle savedInstanceState) {
+        if (null == savedInstanceState) {
+            getBottomNavigation().setDefaultSelectedIndex(0);
+            final BadgeProvider provider = getBottomNavigation().getBadgeProvider();
+            provider.show(R.id.bbn_item3);
+            provider.show(R.id.bbn_item2);
+        }
     }
 }
