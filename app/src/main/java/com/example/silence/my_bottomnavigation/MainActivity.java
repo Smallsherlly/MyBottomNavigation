@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
@@ -23,24 +22,12 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
             getSupportActionBar().hide();
         }// 隐藏标题栏
 
-        final boolean translucentNavigation = hasTranslucentNavigation();// 设置导航栏隐藏？待确认
-
-        if (translucentNavigation) {
-            final ViewPager viewPager = getViewPager();
-            if (null != viewPager) {
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) viewPager.getLayoutParams();
-                params.bottomMargin = -getNavigationBarHeight();
-            }
-        }
-
        initializeBottomNavigation(savedInstanceState);// 初始化底部导航栏
        initializeUI(savedInstanceState);// 初始化界面
 
     }
 
     private void initializeUI(Bundle savedInstanceState) {
-
-
         final ViewPager viewPager = getViewPager();
         if (null != viewPager) {
 
@@ -78,7 +65,6 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
 
     @Override
     public void onMenuItemSelect(final int itemId, final int position, final boolean fromUser) {
-     //   log(TAG, INFO, "onMenuItemSelect(" + itemId + ", " + position + ", " + fromUser + ")");
         if (fromUser) {
             getBottomNavigation().getBadgeProvider().remove(itemId);
             if (null != getViewPager()) {
@@ -89,7 +75,6 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
 
     @Override
     public void onMenuItemReselect(@IdRes final int itemId, final int position, final boolean fromUser) {
-      //  log(TAG, INFO, "onMenuItemReselect(" + itemId + ", " + position + ", " + fromUser + ")");
 
         if (fromUser) {
             final FragmentManager manager = getSupportFragmentManager();

@@ -50,27 +50,12 @@ public class MainActivityFragment extends Fragment {
         final BaseActivity activity = (BaseActivity) getActivity();
         config = activity.getSystemBarTint().getConfig();
         mRoot = (ViewGroup) activity.findViewById(R.id.CoordinatorLayout01);
-        if (mRoot instanceof CoordinatorLayout) {
+
+        if (mRoot instanceof CoordinatorLayout) {// 判断mRoot是否属于Coordinatorlayout实例
             mCoordinatorLayout = (CoordinatorLayout) mRoot;
         }
 
-        final int navigationHeight;
-        final int actionbarHeight;
-
-        if (activity.hasTranslucentNavigation()) {
-            navigationHeight = config.getNavigationBarHeight();
-        } else {
-            navigationHeight = 0;
-        }
-
-        if (activity.hasTranslucentStatusBar()) {
-            actionbarHeight = config.getActionBarHeight();
-        } else {
-            actionbarHeight = 0;
-        }
-
-      //  MiscUtils.log(TAG, Log.VERBOSE, "navigationHeight: " + navigationHeight);
-      //  MiscUtils.log(TAG, Log.VERBOSE, "actionbarHeight: " + actionbarHeight);
+        final int navigationHeight=0;
 
         final BottomNavigation navigation = activity.getBottomNavigation();
         if (null != navigation) {
@@ -78,39 +63,8 @@ public class MainActivityFragment extends Fragment {
                 @Override
                 public void onGlobalLayout() {
                     navigation.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                    final ViewGroup.LayoutParams params = navigation.getLayoutParams();
-                    final CoordinatorLayout.Behavior behavior;
-
-                    if (params instanceof CoordinatorLayout.LayoutParams) {
-                        final CoordinatorLayout.LayoutParams coordinatorLayoutParams = (CoordinatorLayout.LayoutParams) params;
-                        behavior = coordinatorLayoutParams.getBehavior();
-                    } else {
-                        behavior = null;
-                    }
-
-                    if (behavior instanceof BottomBehavior) {
-                        final boolean scrollable = ((BottomBehavior) behavior).isScrollable();
-                        int systemBottomNavigation = activity.hasTranslucentNavigation() ? activity.getNavigationBarHeight() : 0;
-
-                      //  MiscUtils.log(TAG, Log.VERBOSE, "scrollable: " + scrollable);
-
-                        int totalHeight;
-
-                        if (scrollable) {
-                            if (systemBottomNavigation > 0) {
-                                totalHeight = systemBottomNavigation;
-                            } else {
-                                totalHeight = navigationHeight;
-                            }
-                        } else {
-                            totalHeight = navigation.getNavigationHeight();
-                        }
-
-                        createAdater(totalHeight);
-                    } else {
-                        createAdater(navigationHeight);
-                    }
+                    int totalHeight = navigation.getNavigationHeight();
+                    createAdater(totalHeight);
                 }
             });
         } else {
