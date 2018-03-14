@@ -13,10 +13,10 @@
         android:icon="@drawable/ic_cast_connected_white_24dp"
         android:title="主页" />
     <item
-        android:id="@+id/bbn_item3"
-        android:color="@android:color/holo_orange_dark"
-        android:icon="@drawable/ic_mail_white_24dp"
-        android:title="新建" />
+        android:id="@+id/bbn_item5"
+        android:color="#FF9800"
+        android:icon="@drawable/ic_add_circle_white_24dp"
+        android:title="Add New" />
     <item
         android:id="@+id/bbn_item4"
         android:color="#FF5252"
