@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
     }
 
     private void initializeUI(Bundle savedInstanceState) {
-        final ViewPager viewPager = getViewPager();
+        final ViewPager viewPager = getViewPager();// 获取视图页面
         if (null != viewPager) {
 
             getBottomNavigation().setOnMenuChangedListener(new BottomNavigation.OnMenuChangedListener() {
@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
 
     private void initializeBottomNavigation(Bundle savedInstanceState) {
         if (null == savedInstanceState) {
-            getBottomNavigation().setDefaultSelectedIndex(0);
+            getBottomNavigation().setDefaultSelectedIndex(0);// 设置底部导航栏默认高亮位置
         }
     }
 
@@ -76,13 +76,13 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
     @Override
     public void onMenuItemReselect(@IdRes final int itemId, final int position, final boolean fromUser) {
 
-        if (fromUser) {
-            final FragmentManager manager = getSupportFragmentManager();
-            MainActivityFragment fragment = (MainActivityFragment) manager.findFragmentById(R.id.fragment);
-            if (null != fragment) {
-                fragment.scrollToTop();
-            }
-        }
+//        if (fromUser) {
+//            final FragmentManager manager = getSupportFragmentManager();
+//            MainActivityFragment fragment = (MainActivityFragment) manager.findFragmentById(R.id.fragment);// 通过manager获取碎片实例
+//            if (null != fragment) {
+//                fragment.scrollToTop();
+//            }
+//        }
 
     }
 
@@ -98,7 +98,10 @@ public class MainActivity extends BaseActivity implements BottomNavigation.OnMen
 
         @Override
         public Fragment getItem(final int position) {
-            return new MainActivityFragment();
+            if(position == 0)
+                return new MainActivityFragment();
+            else
+                return new MainActivityFragment2();
         }
 
         @Override

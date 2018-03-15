@@ -1,5 +1,9 @@
 package com.example.silence.my_bottomnavigation;
 
+/**
+ * Created by Silence on 2018/3/15.
+ */
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,12 +28,12 @@ import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
  * Created by Silence on 2018/3/14.
  */
 
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment2 extends Fragment {
     RecyclerView mRecyclerView;
     CoordinatorLayout mCoordinatorLayout;
     ViewGroup mRoot;
     String name;
-    public MainActivityFragment(){
+    public MainActivityFragment2(){
 
     }
 
@@ -160,7 +164,7 @@ public class MainActivityFragment extends Fragment {
 
             final Book item = data[position];
             holder.title.setText(item.title);
-            holder.description.setText("By zhuye" );
+            holder.description.setText("By qita" );
             holder.imageView.setImageBitmap(null);
 
             picasso.cancelRequest(holder.imageView);
@@ -205,3 +209,4 @@ public class MainActivityFragment extends Fragment {
         }
     }
 }
+

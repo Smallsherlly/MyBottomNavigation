@@ -1,16 +1,9 @@
 package com.example.silence.my_bottomnavigation;
 
 import android.graphics.Typeface;
-import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
-
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
 /**
@@ -20,10 +13,6 @@ import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 public abstract class BaseActivity extends AppCompatActivity implements BottomNavigation.OnMenuItemSelectionListener {
     private ViewPager mViewPager;
     private SystemBarTintManager mSystemBarTint;
-    private boolean mTranslucentStatus;
-    private boolean mTranslucentStatusSet;
-    private boolean mTranslucentNavigation;
-    private boolean mTranslucentNavigationSet;
     private BottomNavigation mBottomNavigation;
 
 
@@ -50,39 +39,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     }
 
 
-    public boolean hasTranslucentStatusBar() {
-        if (!mTranslucentStatusSet) {
-            if (Build.VERSION.SDK_INT >= 19) {
-                mTranslucentStatus =
-                        ((getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                                == WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            } else {
-                mTranslucentStatus = false;
-            }
-            mTranslucentStatusSet = true;
-        }
-        return mTranslucentStatus;
-    }
 
-    public int getStatusBarHeight() {
-        return getSystemBarTint().getConfig().getStatusBarHeight();
-    }
 
-    public boolean hasTranslucentNavigation() {
-        if (!mTranslucentNavigationSet) {
-            final SystemBarTintManager.SystemBarConfig config = getSystemBarTint().getConfig();
-            if (Build.VERSION.SDK_INT >= 19) {
-                boolean themeConfig =
-                        ((getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-                                == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
-                mTranslucentNavigation = themeConfig && config.hasNavigtionBar() && config.isNavigationAtBottom()
-                        && config.getNavigationBarHeight() > 0;
-            }
-            mTranslucentNavigationSet = true;
-        }
-        return mTranslucentNavigation;
-    }
     public SystemBarTintManager getSystemBarTint() {
         if (null == mSystemBarTint) {
             mSystemBarTint = new SystemBarTintManager(this);
